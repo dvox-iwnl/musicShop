@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
 module.exports = {
     entry: path.join(__dirname, './app.js'),
@@ -26,6 +27,10 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.vue$/,
+                use: 'vue-loader'
             }
         ]
     },
@@ -34,7 +39,8 @@ module.exports = {
         new webpack.ProvidePlugin({
             $: "jquery",
             jQuery: "jquery"
-        })
+        }),
+        new VueLoaderPlugin()
     ],
     output: {
         filename: 'bundle.js',
